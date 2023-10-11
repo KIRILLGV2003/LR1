@@ -1,5 +1,4 @@
-// main.cpp
-#include "Animal.h"
+#include <iostream>
 #include "Keeper.h"
 #include "Fish.h"
 #include "Bird.h"
@@ -9,67 +8,91 @@ int main() {
     Keeper keeper;
 
     while (true) {
-        std::cout << "\n=== Menu ===\n";
-        std::cout << "1. Add Fish\n";
-        std::cout << "2. Add Bird\n";
-        std::cout << "3. Add Cat\n";
-        std::cout << "4. Remove Animal\n";
-        std::cout << "5. Print All Animals\n";
-        std::cout << "6. Save to File\n";
-        std::cout << "7. Load from File\n";
-        std::cout << "8. Exit\n";
-        std::cout << "Enter your choice: ";
+        std::cout << "\nMenu:\n"
+            "1. Add Fish\n"
+            "2. Add Bird\n"
+            "3. Add Cat\n"
+            "4. Remove Animal\n"
+            "5. Print All Animals\n"
+            "6. Save to File\n"
+            "7. Load from File\n"
+            "8. Exit\n";
 
         int choice;
+        std::cout << "Enter your choice: ";
         std::cin >> choice;
 
         switch (choice) {
         case 1: {
-            Fish* fish = new Fish();
-            fish->load(std::cin); // Пользователь вводит данные о рыбе
-            keeper.addAnimal(fish);
+            char breed[100], color[100], diet[100];
+            std::cout << "Enter Fish details:\n";
+            std::cout << "Breed: ";
+            std::cin >> breed;
+            std::cout << "Color: ";
+            std::cin >> color;
+            std::cout << "Diet: ";
+            std::cin >> diet;
+            keeper.addAnimal(new Fish(breed, color, diet));
             break;
         }
         case 2: {
-            Bird* bird = new Bird();
-            bird->load(std::cin); // Пользователь вводит данные о птице
-            keeper.addAnimal(bird);
+            char breed[100], color[100], diet[100], habitat[100];
+            std::cout << "Enter Bird details:\n";
+            std::cout << "Breed: ";
+            std::cin >> breed;
+            std::cout << "Color: ";
+            std::cin >> color;
+            std::cout << "Diet: ";
+            std::cin >> diet;
+            std::cout << "Habitat: ";
+            std::cin >> habitat;
+            keeper.addAnimal(new Bird(breed, color, diet, habitat));
             break;
         }
         case 3: {
-            Cat* cat = new Cat();
-            cat->load(std::cin); // Пользователь вводит данные о кошке
-            keeper.addAnimal(cat);
+            char breed[100], color[100], ownerName[100], petName[100];
+            std::cout << "Enter Cat details:\n";
+            std::cout << "Breed: ";
+            std::cin >> breed;
+            std::cout << "Color: ";
+            std::cin >> color;
+            std::cout << "Owner's Name: ";
+            std::cin >> ownerName;
+            std::cout << "Pet Name: ";
+            std::cin >> petName;
+            keeper.addAnimal(new Cat(breed, color, ownerName, petName));
             break;
         }
         case 4: {
-            std::cout << "Enter the index of the animal to remove: ";
             int index;
+            std::cout << "Enter the index of the animal to remove: ";
             std::cin >> index;
             keeper.removeAnimal(index);
             break;
         }
         case 5:
+            std::cout << "All Animals:\n";
             keeper.printAllAnimals();
             break;
         case 6: {
-            std::cout << "Enter the filename to save: ";
-            std::string filename;
+            char filename[100];
+            std::cout << "Enter the filename to save to: ";
             std::cin >> filename;
             keeper.saveToFile(filename);
             break;
         }
         case 7: {
-            std::cout << "Enter the filename to load: ";
-            std::string filename;
+            char filename[100];
+            std::cout << "Enter the filename to load from: ";
             std::cin >> filename;
             keeper.loadFromFile(filename);
             break;
         }
         case 8:
-            return 0; // Выход из программы
+            std::cout << "Exiting program.\n";
+            return 0;
         default:
-            std::cout << "Invalid choice. Please try again.\n";
+            std::cout << "Invalid choice. Please enter a number from 1 to 8.\n";
         }
     }
 

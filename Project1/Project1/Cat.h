@@ -1,21 +1,26 @@
 // Cat.h
-#include "Animal.h"
-#ifndef CAT_H
-#define CAT_H
+#pragma once
+#include "Base.h"
 
-class Cat : public Animal {
+class Cat : public Base {
+private:
+    char* ownerName;
+    char* petName;
+
 public:
     Cat();
+    Cat(const char* breed, const char* color, const char* ownerName, const char* petName);
+    Cat(const Cat& other);
     ~Cat();
 
-    void print() const override;
-    void save(std::ostream& os) const override;
-    void load(std::istream& is) override;
+    const char* getOwnerName() const;
+    const char* getPetName() const;
 
-    // Добавьте get и set функции по необходимости
+    void setOwnerName(const char* ownerName);
+    void setPetName(const char* petName);
 
-private:
-    std::string feedingType;
+    void printInfo() const;
+
+    void saveToFile(std::ofstream& file) const override;
+    void loadFromFile(std::ifstream& file) override;
 };
-
-#endif // Cat_H

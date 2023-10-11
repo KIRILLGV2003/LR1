@@ -1,21 +1,22 @@
 // Fish.h
-#include "Animal.h"
-#ifndef FISH_H
-#define FISH_H
+#pragma once
 
-class Fish : public Animal {
+#include "Base.h"
+
+class Fish : public Base {
+private:
+    char* feedingType;
+
 public:
     Fish();
+    Fish(const char* breed, const char* color, const char* feedingType);
+    Fish(const Fish& other);
     ~Fish();
 
-    void print() const override;
-    void save(std::ostream& os) const override;
-    void load(std::istream& is) override;
+    const char* getFeedingType() const;
+    void setFeedingType(const char* feedingType);
 
-    // Добавьте get и set функции по необходимости
-
-private:
-    std::string feedingType;
+    void printInfo() const override;
+    void saveToFile(std::ofstream& file) const override;
+    void loadFromFile(std::ifstream& file) override;
 };
-
-#endif // FISH_H

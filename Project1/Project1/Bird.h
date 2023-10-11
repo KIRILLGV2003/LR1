@@ -1,21 +1,29 @@
 // Bird.h
-#include "Animal.h"
 #ifndef BIRD_H
 #define BIRD_H
 
-class Bird : public Animal {
+#include "Base.h"
+
+class Bird : public Base {
 public:
     Bird();
+    Bird(const char* breed, const char* color, const char* diet, const char* habitat);
+    Bird(const Bird& other);
     ~Bird();
 
-    void print() const override;
-    void save(std::ostream& os) const override;
-    void load(std::istream& is) override;
+    const char* getDiet() const;
+    const char* getHabitat() const;
 
-    // Добавьте get и set функции по необходимости
+    void setDiet(const char* diet);
+    void setHabitat(const char* habitat);
+
+    void printInfo() const override;
+    void saveToFile(std::ofstream& file) const override;
+    void loadFromFile(std::ifstream& file) override;
 
 private:
-    std::string feedingType;
+    char* diet;
+    char* habitat;
 };
 
-#endif // Bird_H
+#endif
