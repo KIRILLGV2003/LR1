@@ -4,25 +4,25 @@
 #include <cstring>
 
 Base::Base() : breed(nullptr), color(nullptr) {
-    std::cout << "Base default constructor called." << std::endl;
+    std::cout << "Вызывается базовый конструктор по умолчанию." << std::endl;
 }
 
 Base::Base(const char* breed, const char* color) : breed(nullptr), color(nullptr) {
     setBreed(breed);
     setColor(color);
-    std::cout << "Base parameterized constructor called." << std::endl;
+    std::cout << "Вызывается базовый параметризованный конструктор." << std::endl;
 }
 
 Base::Base(const Base& other) : breed(nullptr), color(nullptr) {
     setBreed(other.breed);
     setColor(other.color);
-    std::cout << "Base copy constructor called." << std::endl;
+    std::cout << "Вызывается конструктор базового копирования." << std::endl;
 }
 
 Base::~Base() {
     delete[] breed;
     delete[] color;
-    std::cout << "Base destructor called." << std::endl;
+    std::cout << "Вызывается базовый деструктор." << std::endl;
 }
 
 const char* Base::getBreed() const {
@@ -35,18 +35,16 @@ const char* Base::getColor() const {
 
 void Base::setBreed(const char* breed) {
     delete[] this->breed;
-    // Используем _strdup, так как он безопасен с точки зрения Microsoft
     this->breed = _strdup(breed);
 }
 
 void Base::setColor(const char* color) {
     delete[] this->color;
-    // Используем _strdup, так как он безопасен с точки зрения Microsoft
     this->color = _strdup(color);
 }
 
 void Base::printInfo() const {
-    std::cout << "Base - Breed: " << breed << ", Color: " << color << std::endl;
+    std::cout << "База - Порода: " << breed << ", Цвет: " << color << std::endl;
 }
 
 void Base::saveToFile(std::ofstream& file) const {
@@ -56,7 +54,6 @@ void Base::saveToFile(std::ofstream& file) const {
 
 void Base::loadFromFile(std::ifstream& file) {
     char buffer[100];
-    file >> buffer; // Считываем метку
     file >> buffer; // Считываем породу
     setBreed(buffer);
     file >> buffer; // Считываем цвет

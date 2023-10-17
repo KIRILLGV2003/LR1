@@ -2,25 +2,25 @@
 #include "Bird.h"
 
 Bird::Bird() : diet(nullptr), habitat(nullptr) {
-    std::cout << "Bird default constructor called." << std::endl;
+    std::cout << "Вызывается конструктор Bird по умолчанию." << std::endl;
 }
 
 Bird::Bird(const char* breed, const char* color, const char* diet, const char* habitat) : Base(breed, color), diet(nullptr), habitat(nullptr) {
     setDiet(diet);
     setHabitat(habitat);
-    std::cout << "Bird parameterized constructor called." << std::endl;
+    std::cout << "Вызывается параметризованный конструктор Bird." << std::endl;
 }
 
 Bird::Bird(const Bird& other) : Base(other), diet(nullptr), habitat(nullptr) {
     setDiet(other.diet);
     setHabitat(other.habitat);
-    std::cout << "Bird copy constructor called." << std::endl;
+    std::cout << "Вызывается конструктор копирования Bird." << std::endl;
 }
 
 Bird::~Bird() {
     delete[] diet;
     delete[] habitat;
-    std::cout << "Bird destructor called." << std::endl;
+    std::cout << "Вызывается птичий деструктор." << std::endl;
 }
 
 const char* Bird::getDiet() const {
@@ -33,18 +33,16 @@ const char* Bird::getHabitat() const {
 
 void Bird::setDiet(const char* diet) {
     delete[] this->diet;
-    // Используем _strdup
     this->diet = _strdup(diet);
 }
 
 void Bird::setHabitat(const char* habitat) {
     delete[] this->habitat;
-    // Используем _strdup
     this->habitat = _strdup(habitat);
 }
 
 void Bird::printInfo() const {
-    std::cout << "Bird - Breed: " << getBreed() << ", Color: " << getColor() << ", Diet: " << diet << ", Habitat: " << habitat << std::endl;
+    std::cout << "Птица - Порода: " << getBreed() << ", Цвет: " << getColor() << ", Тип питания: " << diet << ", Среда обитания: " << habitat << std::endl;
 }
 
 void Bird::saveToFile(std::ofstream& file) const {
@@ -54,12 +52,11 @@ void Bird::saveToFile(std::ofstream& file) const {
 
 void Bird::loadFromFile(std::ifstream& file) {
     char buffer[100];
-    file >> buffer; // Считываем метку
     file >> buffer; // Считываем породу
     setBreed(buffer);
     file >> buffer; // Считываем цвет
     setColor(buffer);
-    file >> buffer; // Считываем диету
+    file >> buffer; // Считываем тип питания
     setDiet(buffer);
     file >> buffer; // Считываем место обитания
     setHabitat(buffer);

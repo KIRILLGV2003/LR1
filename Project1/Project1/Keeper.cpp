@@ -2,7 +2,7 @@
 #include "Keeper.h"
 
 Keeper::Keeper() : animals(nullptr), capacity(0), size(0) {
-    std::cout << "Keeper default constructor called." << std::endl;
+    std::cout << "Вызывается конструктор Keeper по умолчанию." << std::endl;
 }
 
 Keeper::~Keeper() {
@@ -10,7 +10,7 @@ Keeper::~Keeper() {
         delete animals[i];
     }
     delete[] animals;
-    std::cout << "Keeper destructor called." << std::endl;
+    std::cout << "Вызван деструктор Keeper." << std::endl;
 }
 
 void Keeper::addAnimal(Base* animal) {
@@ -29,7 +29,7 @@ void Keeper::removeAnimal(int index) {
         size--;
     }
     else {
-        std::cerr << "Invalid index for removal." << std::endl;
+        std::cerr << "Недопустимый индекс для удаления." << std::endl;
     }
 }
 
@@ -47,10 +47,10 @@ void Keeper::saveToFile(const char* filename) const {
             animals[i]->saveToFile(file);
         }
         file.close();
-        std::cout << "Data saved to file: " << filename << std::endl;
+        std::cout << "Данные, сохраненные в файл: " << filename << std::endl;
     }
     else {
-        std::cerr << "Unable to open file: " << filename << std::endl;
+        std::cerr << "Не удается открыть файл: " << filename << std::endl;
     }
 }
 
@@ -87,7 +87,7 @@ void Keeper::loadFromFile(const char* filename) {
                 animal = new Cat();
                 break;
             default:
-                std::cerr << "Unknown animal type in file." << std::endl;
+                std::cerr << "Неизвестный тип животного в файле." << std::endl;
                 delete animal;
                 continue;
             }
@@ -96,10 +96,10 @@ void Keeper::loadFromFile(const char* filename) {
         }
 
         file.close();
-        std::cout << "Data loaded from file: " << filename << std::endl;
+        std::cout << "Данные, загруженные из файла: " << filename << std::endl;
     }
     else {
-        std::cerr << "Unable to open file: " << filename << std::endl;
+        std::cerr << "Не удается открыть файл: " << filename << std::endl;
     }
 }
 
