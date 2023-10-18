@@ -32,11 +32,19 @@ const char* Bird::getHabitat() const {
 }
 
 void Bird::setDiet(const char* diet) {
+    if (diet == nullptr) {
+        throw std::invalid_argument("Тип питания не может быть пустым");
+    }
+
     delete[] this->diet;
     this->diet = _strdup(diet);
 }
 
 void Bird::setHabitat(const char* habitat) {
+    if (habitat == nullptr) {
+        throw std::invalid_argument("Среда обитания не может быть пустой");
+    }
+
     delete[] this->habitat;
     this->habitat = _strdup(habitat);
 }
@@ -60,4 +68,14 @@ void Bird::loadFromFile(std::ifstream& file) {
     setDiet(buffer);
     file >> buffer; // Считываем место обитания
     setHabitat(buffer);
+}
+
+Bird& Bird::operator=(const Bird& other) {
+    if (this != &other) { // Проверка на самоприсваивание
+        Base::operator=(other); // Вызываем оператор присваивания базового класса
+
+        setDiet(other.diet);
+        setHabitat(other.habitat);
+    }
+    return *this;
 }

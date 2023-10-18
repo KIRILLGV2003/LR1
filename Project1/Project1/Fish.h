@@ -14,9 +14,11 @@ public:
     ~Fish();
 
     const char* getFeedingType() const;
-    void setFeedingType(const char* feedingType);
 
     void printInfo() const override;
     void saveToFile(std::ofstream& file) const override;
     void loadFromFile(std::ifstream& file) override;
+
+    Fish& operator=(const Fish& other);
+    void setFeedingType(const char* feedingType);
 };

@@ -14,12 +14,13 @@ public:
     const char* getDiet() const;
     const char* getHabitat() const;
 
-    void setDiet(const char* diet);
-    void setHabitat(const char* habitat);
-
     void printInfo() const override;
     void saveToFile(std::ofstream& file) const override;
     void loadFromFile(std::ifstream& file) override;
+
+    Bird& operator=(const Bird& other);
+    void setDiet(const char* diet);
+    void setHabitat(const char* habitat);
 
 private:
     char* diet;

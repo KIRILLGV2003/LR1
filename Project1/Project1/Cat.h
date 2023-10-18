@@ -16,11 +16,12 @@ public:
     const char* getOwnerName() const;
     const char* getPetName() const;
 
-    void setOwnerName(const char* ownerName);
-    void setPetName(const char* petName);
-
     void printInfo() const;
 
     void saveToFile(std::ofstream& file) const override;
     void loadFromFile(std::ifstream& file) override;
+
+    Cat& operator=(const Cat& other);
+    void setOwnerName(const char* ownerName);
+    void setPetName(const char* petName);
 };
